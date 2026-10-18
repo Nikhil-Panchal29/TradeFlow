@@ -1,6 +1,7 @@
+
 # TradeFlow
 
-TradeFlow is a real-time trade ingestion dashboard built for the Arham Fintech Software Engineer technical assessment. It simulates fetching trade data from a mock BSE API, stores the imported records in MongoDB, and displays them on a dashboard.
+TradeFlow is a real-time trade ingestion dashboard developed for the Arham Fintech Software Engineer technical assessment. It simulates fetching trade data from a mock BSE API, stores the imported records in MongoDB, and displays them on a dashboard.
 
 The application handles long-running data pulls through multiple short HTTP requests instead of keeping one connection open for the entire operation. Socket.IO is used to send live progress updates to the dashboard without requiring a page refresh or polling.
 
@@ -25,8 +26,6 @@ The application handles long-running data pulls through multiple short HTTP requ
 
 ## Prerequisites
 
-Make sure you have the following installed:
-
 - Node.js 20 or later
 - npm
 - MongoDB Atlas or a local MongoDB instance
@@ -34,21 +33,23 @@ Make sure you have the following installed:
 
 ## Getting Started
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
+```bash
 git clone https://github.com/Nikhil-Panchal29/TradeFlow.git
 cd TradeFlow
+```
 
+### 2. Set Up the Backend
 
-### 2. Set up the backend
-
+```bash
 cd server
 npm install
-
+```
 
 Create a `.env` file inside the `server` directory:
 
-
+```env
 PORT=4000
 MONGODB_URI=your_mongodb_connection_string
 CLIENT_ORIGIN=http://localhost:5173
@@ -58,34 +59,38 @@ BSE_PAGE_SIZE=50
 SEED_COUNT=3000
 REQUEST_TIMEOUT_MS=28000
 BATCH_RETRY_LIMIT=3
-
+```
 
 Replace `your_mongodb_connection_string` with your MongoDB connection string.
 
 Start the backend using the script configured in `server/package.json`. If the script is named `dev`, run:
 
-
+```bash
 npm run dev
+```
 
 The backend should be available at `http://localhost:4000`.
 
-### 3. Set up the frontend
+### 3. Set Up the Frontend
 
 Open a second terminal from the project root:
 
+```bash
 cd client
 npm install
-
+```
 
 Create a `.env` file inside the `client` directory:
 
+```env
 VITE_API_URL=http://localhost:4000
+```
 
+Start the frontend using the script configured in `client/package.json`. If the script is named `dev`, run:
 
-Start the frontend using the script configured in `client/package.json`. If it is named `dev`, run:
-
+```bash
 npm run dev
-
+```
 
 Open the local URL displayed by Vite, usually `http://localhost:5173`.
 
@@ -105,6 +110,7 @@ Do not commit your `.env` files or actual database credentials to GitHub.
 ## API Endpoints
 
 | Method | Endpoint | Description |
+|---|---|---|
 | GET | `/getTrades` | Retrieves mock BSE trades using pagination |
 | POST | `/api/pulls` | Starts a new trade pull |
 | GET | `/api/pulls/current` | Returns the current or latest pull job |
@@ -119,6 +125,7 @@ A successful pull request returns `202 Accepted`. If another pull is already run
 The backend uses Socket.IO to send the following events:
 
 | Event | Description |
+|---|---|
 | `pull:started` | A pull has started |
 | `pull:progress` | Progress has been updated after a batch |
 | `pull:completed` | The pull has completed |
@@ -128,13 +135,37 @@ These events allow the dashboard to display pull progress and status changes wit
 
 ## Database Collections
 
-The application uses three MongoDB collections:
+The application uses three MongoDB collections.
 
-- source_trades —> seeded mock BSE trade records.
-- trades —> records imported into the application.
-- pulljobs —> pull status, progress, timestamps, and error information.
+### `source_trades`
 
-Each trade contains fields such as `tradeId`, `client`, `symbol`, `quantity`, `price`, and `timestamp`.
+Stores seeded mock BSE trade records used as the source for ingestion.
+
+### `trades`
+
+Stores imported trade records. Each trade includes fields such as:
+
+- `tradeId`
+- `client`
+- `symbol`
+- `quantity`
+- `price`
+- `timestamp`
+
+### `pulljobs`
+
+Stores information about each pull job, including:
+
+- `status`
+- `totalRecords`
+- `processedRecords`
+- `insertedRecords`
+- `duplicateRecords`
+- `batchesDone`
+- `batchesTotal`
+- `startedAt`
+- `finishedAt`
+- `error`
 
 ## Notes
 
@@ -147,5 +178,4 @@ Each trade contains fields such as `tradeId`, `client`, `symbol`, `quantity`, `p
 
 **Nikhil Panchal**
 
-[GitHub Profile](https://github.com/Nikhil-Panchal29)
-
+GitHub: [Nikhil-Panchal29](https://github.com/Nikhil-Panchal29)
