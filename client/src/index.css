@@ -1,0 +1,92 @@
+:root {
+  --bg: #EFE3CA;
+  --panel: #FFFFFF;
+  --panel-2: #465A71;
+  --line: #D9DDE5;
+  --text: #24324B;
+  --muted: #E7EDF4;
+  --accent: #8ACBD0;
+  --accent-soft: rgba(138, 203, 208, 0.1);
+  --accent-secondary: #56B6C6;
+  --accent-secondary-soft: rgba(86, 182, 198, 0.1);
+  --sidebar-bg: #170C79;
+  --sidebar-text: #FFFFFF;
+  --sidebar-hover: rgba(138, 203, 208, 0.15);
+  --sidebar-active: rgba(86, 182, 198, 0.25);
+  --amber: #D4A84B;
+  --danger: #B73E3E;
+  --success: #4A8B4A;
+
+  --font-sans: 'Sora', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  font: 15px/145% var(--font-sans);
+  letter-spacing: 0.15px;
+  color-scheme: light;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+h1 {
+  font-size: 32px;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 20px;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
